@@ -6,6 +6,7 @@ using Vimeo.Recorder;
 using PlayFab;
 using PlayFab.ClientModels;
 using PlayFab.Json;
+using PlayFab.AdminModels;
 
 
 public class UploadViewPresenter : Presenter
@@ -90,9 +91,12 @@ public class UploadViewPresenter : Presenter
         videoPost.vimeo_id = MainSceneManager.Instance._recoder.publisher.video.id.ToString();
         videoPost.user_id = Model.UserModel.Id.Value;
         videoPost.video_name = "asd";
-        videoPost.index = 0;
         videoPost.video_upload_date = System.DateTime.Now.ToString();
         videoPost.category_id_list = Model.UploadSeneModel.Category;
+        videoPost.like_count = 0; 
+        videoPost.location = "서울시 광진구"; //테스트 데이터
+        videoPost.post_content = "여기다 이놈들아";//테스트 데이터
+
         InsertPostData(videoPost);
         Model.UploadSeneModel.initcategory();
     }
@@ -133,27 +137,22 @@ public class UploadViewPresenter : Presenter
     /// <param name="PostData"></param>
     public void InsertPostData(Model.VideoPost PostData)
     {
-        var request = new ExecuteCloudScriptRequest
+        string json = JsonUtility.ToJson(PostData);//제이슨화
+
+        var request = new SetTitleDataAndOverridesRequest()
         {
-            FunctionName = "InsertPostData",
-            FunctionParameter = new
-            {
-                vimeo_id = PostData.vimeo_id,
-                user_id = PostData.user_id,
-                user_name = PostData.user_name,
-                video_name = PostData.video_name,
-                category_id_list = PostData.category_id_list
-            }
+            OverrideLabel = "post",
+            KeyValues = Model.VideoPostModel.SetTitleDataKeyValueList(PostData.vimeo_id, json)
         };
 
-        PlayFabClientAPI.ExecuteCloudScript(request, OnInsertPostDataSuccess, OnInsertPostDataError);
+        PlayFabAdminAPI.SetTitleDataAndOverrides(request, OnInsertPostDataSuccess, OnInsertPostDataError);
     }
 
     /// <summary>
     /// 비디오 데이터 저장 성공시 콜백함수
     /// </summary>
     /// <param name="result"></param>
-    public void OnInsertPostDataSuccess(ExecuteCloudScriptResult result)
+    public void OnInsertPostDataSuccess(SetTitleDataAndOverridesResult result)
     {
         Model.UploadSeneModel.changeUploadState(null);
         Debug.Log("성공");

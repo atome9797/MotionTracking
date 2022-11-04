@@ -30,7 +30,7 @@ namespace Model
         /// <summary>
         /// 비디오 데이터 초기화
         /// </summary>
-        public static void InitializePostData(int rowSize, int indexNumber)
+        public static void InitializePostData(int rowSize, string video_id)
         {
             var request = new ExecuteCloudScriptRequest
             {
@@ -38,7 +38,7 @@ namespace Model
                 FunctionParameter = new
                 {
                     row = rowSize,
-                    index = indexNumber
+                    videoId = video_id
                 }
             };
 
@@ -86,7 +86,7 @@ namespace Model
         /// </summary>
         /// <param name="rowSize"></param>
         /// <param name="indexNumber"></param>
-        public static void NextPostData(int rowSize, int indexNumber)
+        public static void NextPostData(int rowSize, string video_id)
         {
             var request = new ExecuteCloudScriptRequest
             {
@@ -94,7 +94,7 @@ namespace Model
                 FunctionParameter = new
                 {
                     row = rowSize,
-                    index = indexNumber
+                    videoId = video_id
                 }
             };
             
@@ -103,7 +103,7 @@ namespace Model
 
 
         /// <summary>
-        /// 비디오 데이터 초기화 실패시 콜백함수
+        /// 다음 슬라이드 넘어가기 실패시 콜백함수
         /// </summary>
         /// <param name="error"></param>
         public static void OnNextPostDataError(PlayFabError error)
@@ -114,7 +114,7 @@ namespace Model
 
 
         /// <summary>
-        /// 비디오 데이터 초기화 성공시 콜백 함수
+        /// 다음 슬라이드 넘어가기 성공시 콜백 함수
         /// </summary>
         /// <param name="result"></param>
         public static void OnNextPostDataSuccess(ExecuteCloudScriptResult result)

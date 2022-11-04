@@ -90,7 +90,7 @@ public sealed class FeedViewPresenter : Presenter
         Model.FeedViewModel.VideoIndex = 0;
         Model.FeedViewModel.VideoTotalIndex = 0;
         Model.FeedViewModel.VideoMultipleIndex = 1;
-        Model.FeedViewModel.InitializePostData(11, 100);
+        Model.FeedViewModel.InitializePostData(11, "2100000000");
 
         //�� �Ʒ� �ƴϸ� ��Ȱ��ȭ
         FeedView.LastFeedBtn.gameObject.SetActive(false);
@@ -100,7 +100,7 @@ public sealed class FeedViewPresenter : Presenter
     protected override void OnUpdatedModel()
     {
         //���� ���� �������� 11��
-        Model.FeedViewModel.InitializePostData(11, 100);
+        Model.FeedViewModel.InitializePostData(11, "2100000000");
     }
 
     private void InitLoadVideo()
@@ -222,7 +222,7 @@ public sealed class FeedViewPresenter : Presenter
                 //�ε����� 5�� ����̰� ���� �����͸� �߰��������� +1����
                 if (Model.FeedViewModel.VideoIndex % (5 * Model.FeedViewModel.VideoMultipleIndex) == 0)
                 {
-                    Model.FeedViewModel.NextPostData(11, Model.FeedViewModel.PostData[Model.FeedViewModel.VideoTotalIndex].index);
+                    Model.FeedViewModel.NextPostData(11, Model.FeedViewModel.PostData[Model.FeedViewModel.VideoTotalIndex].vimeo_id);
                 }
             }
 

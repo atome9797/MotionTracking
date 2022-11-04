@@ -1,4 +1,5 @@
 using PlayFab;
+using PlayFab.AdminModels;
 using PlayFab.ClientModels;
 using PlayFab.Json;
 using System;
@@ -13,18 +14,45 @@ namespace Model
     {
         public string vimeo_id; //비디오 아이디
         public string user_id; //유저 아이디
-        public string user_name; //유저 이름
-        public int index; //인덱스
         public string video_name; //비디오 이름
         public string video_upload_date; //업로드 날짜
         public List<int> category_id_list = new List<int>();//카테고리 리스트
+        public int like_count; //좋아요 수
+        public string location; //지역
+        public string post_content; //피드 내용
     }
+
+
     [Serializable]
     public class VideoCategory
     {
         public int category_id;//카테고리 아이디
         public string category_name;//카테고리 이름
     }
+
+
+    public static class VideoPostModel
+    {
+        //재정의 key/value 설정
+        public static List<TitleDataKeyValue> TitleDataKeyValueList = new List<TitleDataKeyValue>();
+        public static TitleDataKeyValue TitleDataKeyValue = new TitleDataKeyValue();
+
+
+        public static List<TitleDataKeyValue> SetTitleDataKeyValueList(string key, string value)
+        {
+            TitleDataKeyValueList.Clear(); //초기화
+
+            TitleDataKeyValue.Key = key;
+            TitleDataKeyValue.Value = value;
+            TitleDataKeyValueList.Add(TitleDataKeyValue); //key value 배열 리스트에 추가
+
+            return TitleDataKeyValueList;
+        }
+
+    }
+
+
+
     public static class CategoryModel
     {
         //카테고리 데이터 선언
@@ -51,7 +79,7 @@ namespace Model
         /// 카테고리 데이터 가져오기 성공 콜백 함수
         /// </summary>
         /// <param name="result"></param>
-        public static void OnInitCategoryDataSuccess(ExecuteCloudScriptResult result)
+        public static void OnInitCategoryDataSuccess(PlayFab.ClientModels.ExecuteCloudScriptResult result)
         {
             JsonArray jsonArray = new JsonArray();
             jsonArray = (JsonArray)result.FunctionResult;
