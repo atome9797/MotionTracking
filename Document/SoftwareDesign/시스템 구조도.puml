@@ -1,0 +1,28 @@
+@startuml Metafandom System
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Person(user, "사용자")
+System_Boundary(metafandom, "메타팬덤") {
+    Container(introScene, "Intro", $descr="로그인 및 회원가입 기능 제공")
+    Container_Boundary(mainScene, "Main") {
+        Component(mainFeed, "Main_Feed", $descr="피드 시스템")
+        Component(mainUpload, "Main_Upload", $descr="영상 업로드 시스템")
+    }
+}
+System(playfab, "PlayFab")
+System(vimeo, "Vimeo")
+
+
+Lay_D(introScene, mainScene)
+Lay_R(metafandom, playfab)
+
+
+Rel_D(user, metafandom, "사용")
+
+Rel_D(introScene, mainScene, "로그인 성공")
+
+Rel(metafandom, playfab, "유저 및 공용 데이터 읽기/쓰기")
+Rel(metafandom, vimeo, "영상 데이터 읽기/쓰기")
+
+@enduml

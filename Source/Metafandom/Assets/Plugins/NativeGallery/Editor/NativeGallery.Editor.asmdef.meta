@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Source/Metafandom/Assets/Plugins/NativeGallery/Editor/PlayFabEditorPrefsSO.asset.meta
+guid: b914980fa8564124bb37cee8092f0fb9
+NativeFormatImporter:
+========
+guid: 3dffc8e654f00c545a82d0a5274d51eb
+AssemblyDefinitionImporter:
+>>>>>>>> develop:Source/Metafandom/Assets/Plugins/NativeGallery/Editor/NativeGallery.Editor.asmdef.meta
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

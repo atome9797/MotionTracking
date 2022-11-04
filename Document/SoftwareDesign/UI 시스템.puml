@@ -1,0 +1,18 @@
+@startuml UI System
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+System_Boundary(uiSystem, "UI System") {
+    Container_Boundary(viewController, "View Controller", $tags="UI 요소를 관리하며, Presenter와 View를 연결시켜줍니다.") {
+        Component(view, "View", $descr="UGUI와의 연결 다리입니다.")
+        Component(presenter, "Presenter", $descr="Model과 View를 이어줍니다. UniRx를 사용합니다.")
+    }
+    Container(model, "Model", $descr="데이터를 관리합니다.")
+}
+
+Rel_R(presenter, view, "뷰 업데이트")
+Rel_L(view, presenter, "유저 이벤트 전달")
+
+Rel_R(model, presenter, "상태 변화 이벤트 전달")
+Rel_L(presenter, model, "모델 업데이트")
+@enduml
