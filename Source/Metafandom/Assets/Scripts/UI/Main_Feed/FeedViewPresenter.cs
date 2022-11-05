@@ -73,6 +73,26 @@ public sealed class FeedViewPresenter : Presenter
             .AsObservable()
             .Subscribe(_ => ResetVideoList());
 
+        //좋아요 버튼 클릭시 좋아요 증가
+        FeedView.LikeFeedBtn.OnClickAsObservable().Subscribe(_=> LikeOnOffButton()).AddTo(CompositeDisposable);
+
+
+        //피드 로드 되면 해당 피드의 정보 표시하기
+        Model.FeedViewModel.FeedLikeCount.Subscribe(FeedLikeUpdate).AddTo(CompositeDisposable);
+
+    }
+
+
+    protected override void OnUpdatedModel()
+    {
+        //���� ���� �������� 11��
+        Model.FeedViewModel.InitializePostData(11, "2100000000");
+    }
+
+    //좋아요 버튼 클릭시 플레이어 데이터에 video_id 증가
+    private void LikeOnOffButton()
+    {
+        //DB접근
     }
 
 
@@ -82,6 +102,11 @@ public sealed class FeedViewPresenter : Presenter
         {
             InitLoadVideo();
         }
+    }
+
+    private void FeedLikeUpdate(int FeedLikeCount)
+    {
+        
     }
 
 
@@ -97,12 +122,6 @@ public sealed class FeedViewPresenter : Presenter
         FeedView.FeedBar.gameObject.SetActive(false);
     }
 
-    protected override void OnUpdatedModel()
-    {
-        //���� ���� �������� 11��
-        Model.FeedViewModel.InitializePostData(11, "2100000000");
-    }
-
     private void InitLoadVideo()
     {
         FeedView.VimeoPlayers[PageNumberIndexList[0]].autoPlay = true;
@@ -111,6 +130,8 @@ public sealed class FeedViewPresenter : Presenter
 
         FeedView.VimeoPlayers[PageNumberIndexList[1]].LoadVideo(Model.FeedViewModel.PostData[0].vimeo_id);
         FeedView.VimeoPlayers[PageNumberIndexList[2]].LoadVideo(Model.FeedViewModel.PostData[1].vimeo_id);
+
+        Model.FeedViewModel.VideoInitSuccess.Value = false;
     }
 
 

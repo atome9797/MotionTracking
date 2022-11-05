@@ -26,6 +26,18 @@ namespace Model
         //동영상 인덱스 5의 배수
         public static int VideoMultipleIndex = 1;
 
+        //피드 닉네임
+
+        //피드 지역
+
+        //피드 좋아요
+        public static readonly IntReactiveProperty FeedLikeCount = new IntReactiveProperty();
+
+        //피드 북마크
+
+        //피드 내용
+
+
 
         /// <summary>
         /// 비디오 데이터 초기화

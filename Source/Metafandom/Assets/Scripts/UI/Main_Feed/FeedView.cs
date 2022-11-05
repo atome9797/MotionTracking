@@ -28,6 +28,22 @@ public class FeedView : View
     //마지막 피드 버튼 생성
     public Button LastFeedBtn { get; private set; }
 
+    //좋아요 버튼 생성
+    public Button LikeFeedBtn { get; private set; }
+    //북마크 버튼 생성
+    public Button BookmarkBtn { get; private set; }
+    //공유하기 버튼 생성
+    public Button ShareBtn { get; private set; }
+    //더보기 버튼 생성
+    public Button MoreViewBtn { get; private set; }
+    //닉네임 텍스트 생성
+    public TextMeshProUGUI NickName { get; private set; }
+    //피드 내용 생성
+    public TextMeshProUGUI FeedContent { get; private set; }
+    //피드 지역 내용 생성
+    public TextMeshProUGUI FeedLocation { get; private set; }
+
+
 
     private void Awake()
     {
@@ -56,11 +72,36 @@ public class FeedView : View
 
         }
 
+        //피드 초기화 배너
         FeedBar = transform.Find("ResetFeedBar").GetComponent<Image>();
         Debug.Assert(FeedBar != null);
 
+        //피드 초기화 버튼
         LastFeedBtn = transform.Find("ResetFeedBtn").GetComponent<Button>();
         Debug.Assert(LastFeedBtn != null);
+
+        //좋아요 버튼
+        LikeFeedBtn = transform.Find("LikeFeedBtn").GetComponent<Button>();
+        Debug.Assert(LikeFeedBtn != null);
+
+        //북마크 버튼
+        BookmarkBtn = transform.Find("BookmarkBtn").GetComponent<Button>();
+        Debug.Assert(BookmarkBtn != null);
+        //공유하기 버튼
+        ShareBtn = transform.Find("ShareBtn").GetComponent<Button>();
+        Debug.Assert(ShareBtn != null);
+        //더보기 버튼
+        MoreViewBtn = transform.Find("MoreViewBtn").GetComponent<Button>();
+        Debug.Assert(MoreViewBtn != null);
+        //닉네임 텍스트
+        NickName = transform.Find("NickName").GetComponent<TextMeshProUGUI>();
+        Debug.Assert(NickName != null);
+        //피드 내용
+        FeedContent = transform.Find("FeedContent").GetComponent<TextMeshProUGUI>();
+        Debug.Assert(FeedContent != null);
+        //피드 지역 내용
+        FeedLocation = transform.Find("FeedLocation").GetComponent<TextMeshProUGUI>();
+        Debug.Assert(FeedLocation != null);
 
     }
 
